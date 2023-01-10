@@ -1,0 +1,43 @@
+<%- include('partials/_htmlhead'); -%>
+    <h1>
+        <%= title %>
+    </h1>
+    <!-- placeholder for ejs script to output the body data -->
+    <% if (data) { %>
+        <p>Data received in last request:</p>
+        <table>
+            <caption>Form data</caption>
+            <% for (const name in data) { %>
+                <tr>
+                    <th>
+                        <%= name %>
+                    </th>
+                    <td>
+                        <%= data[name] %>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+        <% } %>
+
+            <p>Submission form</p>
+            <form action="/" method="post">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" value="<%= data.name %> " />
+                </div>
+
+                <div>
+                    <label for="job">Job</label>
+                    <input type="text" id="job" name="job" placeholder="Your Job" value="<%= data.job %> " />
+                </div>
+
+                <div>
+                    <label for="nodejs">Like Node.js?</label>
+                    <input type="checkbox" id="nodejs" name="nodejs" value="yes" <% if (data.nodejs) { %> checked <% }
+                        %> />
+                </div>
+                <input type="hidden" name="date" value="<%= new Date(); %>" />
+                <button>Submit</button>
+            </form>
+            <%- include('partials/_htmlfoot'); -%>
